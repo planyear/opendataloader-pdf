@@ -2,7 +2,7 @@ FROM maven:3.9-eclipse-temurin-21 AS java-build
 WORKDIR /build
 COPY java/ java/
 COPY scripts/build-java.sh scripts/
-RUN bash scripts/build-java.sh
+RUN cd java && mvn -B clean package -P release -DskipTests
 
 FROM python:3.12-slim
 WORKDIR /app
